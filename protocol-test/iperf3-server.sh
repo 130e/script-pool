@@ -36,11 +36,12 @@ b)
 	;;
 esac
 
+# Start
 echo "Iperf server type $1, Run $2"
 
 iperf_run "$2" &
 # server "$2" &
-pcap "$2" &
+#pcap "$2" &
 
 # counter=$(($2 * 10))
 # while [ $counter -gt 0 ]
