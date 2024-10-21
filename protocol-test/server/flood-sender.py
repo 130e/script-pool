@@ -1,5 +1,3 @@
-# Not maintained. Don't use
-
 #!/bin/env python3
 
 import socket

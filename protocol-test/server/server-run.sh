@@ -1,9 +1,8 @@
 #!/bin/bash
-# date
 TIME=$(date +%Y-%m-%d-%H%M%S)
 # unix time
 # TIME=$(date +%s%N)
-PORT=5201
+PORT=5257
 DURATION=60
 UDPBUFSZ=16M
 IPERF=iperf3
@@ -14,7 +13,7 @@ iperf_only() {
 }
 
 iperf_run() {
-	iperf3 -s -i 0.1 -p ${PORT} -1 -J --logfile "server-$1-${TIME}.log"
+	${IPERF} -s -i 0.1 -p ${PORT} -1 -J --logfile "server-$1-${TIME}.log"
 }
 
 pcap() {
@@ -40,15 +39,6 @@ esac
 echo "Iperf server type $1, Run $2"
 
 iperf_run "$2" &
-# server "$2" &
-#pcap "$2" &
-
-# counter=$(($2 * 10))
-# while [ $counter -gt 0 ]
-# do
-#     ss -itH '( sport = :5257 )' >> ss-$1.log
-#     sleep 0.1
-#     counter=$(( $counter - 1 ))
-# done
+# pcap "$2" &
 
 kill -- -$$
