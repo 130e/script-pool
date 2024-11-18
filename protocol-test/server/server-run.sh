@@ -41,4 +41,4 @@ echo "Iperf server type $1, Run $2"
 iperf_run "$2" &
 # pcap "$2" &
 
-kill -- -$$
+# kill -- -$$
