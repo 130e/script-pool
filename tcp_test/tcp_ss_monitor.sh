@@ -57,9 +57,6 @@ monitor_connection() {
 
         # Write to log file
         write_log "$current_time" "$output"
-
-        # Sleep for X seconds
-        # sleep 0.001
     done
 }
 
