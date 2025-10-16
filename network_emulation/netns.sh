@@ -39,7 +39,7 @@ create_netns() {
   for i in $(seq 1 $n); do
     veth_name="veth$(($i - 1))"
     ip -netns "$netns_a" link add dev "$veth_name" type veth peer name "${veth_name}_b"
-    ip -netns "$netns_a" link set "${veth_name}_b" netns "$netns_b" 
+    ip -netns "$netns_a" link set "${veth_name}_b" netns "$netns_b"
     ip -netns "$netns_b" link set "${veth_name}_b" name "$veth_name"
     ip -netns "$netns_a" addr add "10.0.0.1/32" dev "$veth_name"
     ip -netns "$netns_a" link set dev "$veth_name" up
@@ -58,7 +58,9 @@ exec_netns() {
     print_exec_help
     exit 1
   fi
-  shift; shift; shift
+  shift
+  shift
+  shift
   ip netns exec "${net}_${host}" "$@"
 }
 
@@ -73,17 +75,17 @@ destroy_netns() {
 }
 
 case "$1" in
-  create)
-    create_netns "$@"
+create)
+  create_netns "$@"
   ;;
-  exec)
-    exec_netns "$@"
+exec)
+  exec_netns "$@"
   ;;
-  destroy)
-    destroy_netns "$@"
+destroy)
+  destroy_netns "$@"
   ;;
-  *)
-    print_help
-    exit 1
+*)
+  print_help
+  exit 1
   ;;
 esac
